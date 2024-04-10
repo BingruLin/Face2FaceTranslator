@@ -74,6 +74,10 @@ Page({
     let buttonItem = detail.buttonItem || {}
     manager.start({
       lang: buttonItem.lang,
+      frameSize: 0.1,
+      sampleRate: 8000,
+      encodeBitRate: 48000,
+      format: "mp3"
     })
 
     this.setData({
@@ -359,6 +363,12 @@ Page({
         bottomButtonDisabled: false,
       })
 
+    }
+
+    manager.onFrameRecorded = (res) => {
+      const { frameBuffer } = res;
+
+      console.log('frameBuffer.byteLength');
     }
 
     // 语音播放开始事件
